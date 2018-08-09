@@ -13,8 +13,7 @@ public class Categoria implements Serializable{
 	
 	private List<Movimento> movimentos = new ArrayList<>();
 	
-	public Categoria() {
-		
+	public Categoria() {	
 	}
 
 	public Categoria(Integer id, String nome) {
