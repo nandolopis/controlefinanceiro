@@ -4,31 +4,58 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
-public abstract class Movimento implements Serializable{
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
+public class Movimento implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-
-	private Integer id;
-	private String nome;
+	@JsonIgnore
+	@EmbeddedId
+	private MovimentoPK id = new MovimentoPK();
 	
+	private String nome;
+	private Double endrada;
+	private Double saida;
+	
+	
+	@ManyToMany
+	@JoinTable(name = "MOVIMENTO_CATEGORIA",
+				joinColumns = @JoinColumn(name = "MOVIMENTO_id"),
+				inverseJoinColumns = @JoinColumn(name = "categoria_id")
+			)
 	private List<Categoria> categorias = new ArrayList<>();
 	
 	public Movimento() {
 		
 	}
 
-	public Movimento(Integer id, String nome) {
+
+	public Movimento(Conta conta, String nome, Double endrada, Double saida) {
 		super();
-		this.id = id;
+		id.setConta(conta);
 		this.nome = nome;
+		this.endrada = endrada;
+		this.saida = saida;
+	}
+	
+	
+	
+	public double getSubTotal() {
+		return endrada - saida;
 	}
 
-	public Integer getId() {
+	public MovimentoPK getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(MovimentoPK id) {
 		this.id = id;
 	}
 
@@ -40,7 +67,21 @@ public abstract class Movimento implements Serializable{
 		this.nome = nome;
 	}
 
-	
+	public Double getEndrada() {
+		return endrada;
+	}
+
+	public void setEndrada(Double endrada) {
+		this.endrada = endrada;
+	}
+
+	public Double getSaida() {
+		return saida;
+	}
+
+	public void setSaida(Double saida) {
+		this.saida = saida;
+	}
 
 	public List<Categoria> getCategorias() {
 		return categorias;
@@ -49,6 +90,8 @@ public abstract class Movimento implements Serializable{
 	public void setCategorias(List<Categoria> categorias) {
 		this.categorias = categorias;
 	}
+
+
 
 	@Override
 	public int hashCode() {

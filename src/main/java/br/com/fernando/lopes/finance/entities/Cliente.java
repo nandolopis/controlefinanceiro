@@ -1,23 +1,32 @@
 package br.com.fernando.lopes.finance.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
+@Entity
 public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private Integer codigo;
 	private String name;
 	private Date dataCadastro;
 	
-
+	@Column(unique = true)
 	private String email;
 	
 	@JsonIgnore
@@ -25,8 +34,9 @@ public class Cliente implements Serializable {
 	
 	private Date dataAniversario;
 	
-
-	private List<Conta> contas = new ArrayList<>();
+	//@ElementCollection
+	@OneToMany(mappedBy="cliente", cascade = CascadeType.ALL)
+	private Set<Conta> contas = new HashSet<>();
 	
 	public Cliente() {
 		dataCadastro = new Date();
@@ -97,11 +107,13 @@ public class Cliente implements Serializable {
 		this.dataAniversario = dataAniversario;
 	}
 
-	public List<Conta> getContas() {
+
+
+	public Set<Conta> getContas() {
 		return contas;
 	}
 
-	public void setContas(List<Conta> contas) {
+	public void setContas(Set<Conta> contas) {
 		this.contas = contas;
 	}
 

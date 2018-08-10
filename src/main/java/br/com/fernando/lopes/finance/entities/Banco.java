@@ -5,19 +5,25 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+@Entity
 public class Banco implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private Integer codigo;
 	private String name;
 	private Date dataCriacao;
-
-	private Cliente cliente;
 	
-
+	
+	@OneToMany(mappedBy="banco")
 	private List<Conta> contas = new ArrayList<>();
 	
 	public Banco() {
@@ -53,15 +59,6 @@ public class Banco implements Serializable{
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
 	}
 
 	public List<Conta> getContas() {
