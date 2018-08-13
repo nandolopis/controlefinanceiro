@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -25,12 +26,9 @@ public class Movimento implements Serializable{
 	private Double saida;
 	
 	
-	@ManyToMany
-	@JoinTable(name = "MOVIMENTO_CATEGORIA",
-				joinColumns = @JoinColumn(name = "MOVIMENTO_id"),
-				inverseJoinColumns = @JoinColumn(name = "categoria_id")
-			)
-	private List<Categoria> categorias = new ArrayList<>();
+	@ManyToOne
+	@JoinColumn(name="Categoria_id")
+	Categoria categorias;
 	
 	public Movimento() {
 		
@@ -83,14 +81,14 @@ public class Movimento implements Serializable{
 		this.saida = saida;
 	}
 
-	public List<Categoria> getCategorias() {
+	public Categoria getCategorias() {
 		return categorias;
 	}
 
-	public void setCategorias(List<Categoria> categorias) {
+
+	public void setCategorias(Categoria categorias) {
 		this.categorias = categorias;
 	}
-
 
 
 	@Override

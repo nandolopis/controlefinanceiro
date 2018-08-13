@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Categoria implements Serializable{
@@ -16,7 +17,7 @@ public class Categoria implements Serializable{
 	private Integer id;
 	private String nome;
 	
-	@ManyToMany(mappedBy="categorias")
+	@OneToMany(mappedBy="categorias")
 	private List<Movimento> movimentos = new ArrayList<>();
 	
 	public Categoria() {	
