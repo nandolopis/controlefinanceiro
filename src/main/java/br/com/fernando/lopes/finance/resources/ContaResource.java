@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.fernando.lopes.finance.entities.Conta;
 import br.com.fernando.lopes.finance.services.ContaService;
 
 @RestController
@@ -18,7 +19,8 @@ public class ContaResource {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id){
-		
+		Conta obj = service.find(id);
+		return ResponseEntity.ok().body(obj);
 	}
 
 }
