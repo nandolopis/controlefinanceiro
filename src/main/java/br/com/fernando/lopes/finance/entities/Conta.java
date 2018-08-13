@@ -37,14 +37,15 @@ public class Conta implements Serializable{
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date dataCriacao;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="banco_id")
+	@MapsId
 	private Banco banco;
 	
 	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
-	@MapsId
+	//@MapsId
 	private Cliente cliente;
 	
 	@JsonManagedReference

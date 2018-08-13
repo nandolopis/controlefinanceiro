@@ -1,10 +1,11 @@
 package br.com.fernando.lopes.finance.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,8 +29,8 @@ public class Banco implements Serializable{
 	private Date dataCriacao;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "banco")
-	private List<Conta> contas = new ArrayList<>();
+	@OneToMany(mappedBy = "banco", cascade=CascadeType.ALL)
+	private Set<Conta> contas = new HashSet<>();
 	
 	public Banco() {
 		dataCriacao = new Date();
@@ -66,14 +67,13 @@ public class Banco implements Serializable{
 		this.name = name;
 	}
 
-	public List<Conta> getContas() {
+	public Set<Conta> getContas() {
 		return contas;
 	}
 
-	public void setContas(List<Conta> contas) {
+	public void setContas(Set<Conta> contas) {
 		this.contas = contas;
 	}
-	
 
 	public Date getDataCriacao() {
 		return dataCriacao;
