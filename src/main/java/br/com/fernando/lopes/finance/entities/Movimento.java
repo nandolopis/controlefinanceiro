@@ -1,59 +1,63 @@
 package br.com.fernando.lopes.finance.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.EmbeddedId;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import br.com.fernando.lopes.finance.entities.tipos.LancamentoTipo;
+import br.com.fernando.lopes.finance.entities.tipos.StatusMovimento;
 
 @Entity
 public class Movimento implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	@JsonIgnore
-	@EmbeddedId
-	private MovimentoPK id = new MovimentoPK();
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 	private String nome;
-	private Double endrada;
-	private Double saida;
 	
-	
+	@JsonBackReference
 	@ManyToOne
-	@JoinColumn(name="Categoria_id")
-	Categoria categorias;
+	@JoinColumn(name="conta_id")
+	@MapsId
+	private Conta conta;
+	
+	
+	@OneToMany(mappedBy="id.movimento", cascade = CascadeType.ALL)
+	private Set<Lancamento> lancamentos = new HashSet<>();
+	
 	
 	public Movimento() {
 		
 	}
+	
 
-
-	public Movimento(Conta conta, String nome, Double endrada, Double saida) {
+	public Movimento(Integer id, String nome, Conta conta) {
 		super();
-		id.setConta(conta);
+		this.id = id;
 		this.nome = nome;
-		this.endrada = endrada;
-		this.saida = saida;
-	}
-	
-	
-	
-	public double getSubTotal() {
-		return endrada - saida;
+		this.conta = conta;
 	}
 
-	public MovimentoPK getId() {
+
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(MovimentoPK id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -65,30 +69,41 @@ public class Movimento implements Serializable{
 		this.nome = nome;
 	}
 
-	public Double getEndrada() {
-		return endrada;
+	public Conta getConta() {
+		return conta;
 	}
 
-	public void setEndrada(Double endrada) {
-		this.endrada = endrada;
+	public void setConta(Conta conta) {
+		this.conta = conta;
+	}
+	
+	
+	public Set<Lancamento> getLancamentos() {
+		return lancamentos;
 	}
 
-	public Double getSaida() {
-		return saida;
+	public void setLancamentos(Set<Lancamento> lancamentos) {
+		this.lancamentos = lancamentos;
 	}
 
-	public void setSaida(Double saida) {
-		this.saida = saida;
-	}
+	public Double getSaldo() {
+		Double saldo = 0.0D;
+		
+		for (Lancamento l : lancamentos) {
+			if ((l.getTipo() == LancamentoTipo.ENTRADA) && (l.getStatus() == StatusMovimento.RECEBIDO)) {
+			saldo += l.getValor();
+			} else if ((l.getTipo() == LancamentoTipo.SAIDA) && (l.getStatus() == StatusMovimento.PAGO)){
+				saldo -= l.getValor();
+			} else {
+				saldo += 0.0D;
+			}
+		}
 
-	public Categoria getCategorias() {
-		return categorias;
+		return saldo;
 	}
-
-
-	public void setCategorias(Categoria categorias) {
-		this.categorias = categorias;
-	}
+	
+	
+	
 
 
 	@Override
@@ -98,6 +113,7 @@ public class Movimento implements Serializable{
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -115,6 +131,9 @@ public class Movimento implements Serializable{
 			return false;
 		return true;
 	}
+
+
+	
 	
 	
 	

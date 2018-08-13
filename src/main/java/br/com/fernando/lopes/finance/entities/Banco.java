@@ -11,26 +11,31 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Banco implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private Integer codigo;
 	private String name;
+	
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date dataCriacao;
 	
-	
-	@OneToMany(mappedBy="banco")
+	@JsonIgnore
+	@OneToMany(mappedBy = "banco")
 	private List<Conta> contas = new ArrayList<>();
 	
 	public Banco() {
 		dataCriacao = new Date();
 	}
 
-	public Banco(Integer id,Integer codigo, String name) {
+	public Banco(Integer id, Integer codigo, String name) {
 		this.id = id;
 		this.codigo =  codigo;
 		this.name = name;

@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,7 +15,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.com.fernando.lopes.finance.entities.tipos.ContaTipo;
 
@@ -25,32 +29,39 @@ public class Conta implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
 	private ContaTipo tipoconta;
+	
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date dataCriacao;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="banco_id")
 	private Banco banco;
 	
-	@JsonIgnore
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
 	@MapsId
 	private Cliente cliente;
 	
-	@OneToMany(mappedBy="id.conta")
-	private Set<Movimento> movimento = new HashSet<>();
+	@JsonManagedReference
+	@OneToMany(mappedBy="conta", cascade = CascadeType.ALL)
+	private Set<Movimento> movimentos = new HashSet<>();
 	
 	public Conta() {
 		dataCriacao = new Date();
 	}
-	
-	public Conta(Integer id, String name) {
+
+	public Conta(Integer id, String name, ContaTipo tipoconta, Banco banco, Cliente cliente) {
+		super();
 		this.id = id;
 		this.name = name;
+		this.tipoconta = tipoconta;
+		this.banco = banco;
+		this.cliente = cliente;
 		dataCriacao = new Date();
 	}
 
@@ -100,13 +111,15 @@ public class Conta implements Serializable{
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-
-	public Set<Movimento> getMovimento() {
-		return movimento;
+	
+	
+	@JsonIgnore
+	public Set<Movimento> getMovimentos() {
+		return movimentos;
 	}
 
-	public void setMovimento(Set<Movimento> movimento) {
-		this.movimento = movimento;
+	public void setMovimento(Set<Movimento> movimentos) {
+		this.movimentos = movimentos;
 	}
 
 	@Override
