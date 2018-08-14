@@ -66,10 +66,30 @@ public class ControlefinanceApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 	
 		
-		Categoria cat1 = new Categoria(null,"Despesa Pessoal");
-		Categoria cat2 = new Categoria(null, "Habitação");
+		Categoria cat1 = new Categoria(null,"Alimentação");
+		Categoria cat2 = new Categoria(null, "Despesas pessoais");
+		Categoria cat3 = new Categoria(null, "Dividas");
+		Categoria cat4 = new Categoria(null, "Educação");
+		Categoria cat5 = new Categoria(null, "Imposto e taxas");
+		Categoria cat6 = new Categoria(null, "Lazer");
+		Categoria cat7 = new Categoria(null, "Habitação");
+		Categoria cat8 = new Categoria(null, "Outros");
+		Categoria cat9 = new Categoria(null, "Renda");
+		Categoria cat10 = new Categoria(null, "Saúde");
+		Categoria cat11 = new Categoria(null, "Transporte");
 		
-		categoriaRepository.saveAll(Arrays.asList(cat1, cat2)); 
+		
+		categoriaRepository.saveAll(Arrays.asList(cat1,
+												  cat2,
+												  cat3,
+												  cat4,
+												  cat5,
+												  cat6,
+												  cat7,
+												  cat8,
+												  cat9,
+												  cat10,
+												  cat11)); 
 		
 		/*
 		Calendar calendar = Calendar.getInstance();
