@@ -126,10 +126,7 @@ public class ControlefinanceApplication implements CommandLineRunner {
 		
 		lancamentoRepository.saveAll(Arrays.asList(lan1, lan2, lan3));
 		mov1.getLancamentos().addAll(Arrays.asList(lan1, lan2, lan3));
-		
-		
-		
-		
+
 		
 	}
 }

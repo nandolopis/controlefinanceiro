@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import br.com.fernando.lopes.finance.dto.CategoriaDTO;
 import br.com.fernando.lopes.finance.entities.Categoria;
 import br.com.fernando.lopes.finance.reposirories.CategoriaRepository;
 import br.com.fernando.lopes.finance.services.exceptions.ObjectNotFoundException;
@@ -65,6 +66,14 @@ public class CategoriaService {
 	public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction ){
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
+	}
+	
+	/*
+	 * obj aux que instancia um obj a partir de um obj DTO
+	 */
+	
+	public Categoria fromDTO(CategoriaDTO objDto) {
+		return new Categoria(o)
 	}
 
 }

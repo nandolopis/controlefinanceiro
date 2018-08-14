@@ -46,7 +46,7 @@ public class CategoriaResource {
 		 * @RequestBody constroi o obj apartir dos dados json 
 		 */
 		@RequestMapping(method=RequestMethod.POST)
-		public ResponseEntity<Void> insert(@RequestBody Categoria obj){ 
+		public ResponseEntity<Void> insert(@RequestBody CategoriaDTO objDto){ 
 			obj = service.insert(obj);
 			
 			System.out.println(obj);
