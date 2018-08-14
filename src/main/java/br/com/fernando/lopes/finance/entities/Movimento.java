@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,7 +31,7 @@ public class Movimento implements Serializable{
 	@JoinColumn(name="conta_id")
 	private Conta conta;	
 	
-	@OneToMany(mappedBy="id.movimento", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="id.movimento")
 	private Set<Lancamento> lancamentos = new HashSet<>();
 		
 	public Movimento() {

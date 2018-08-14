@@ -8,17 +8,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import br.com.fernando.lopes.finance.entities.Banco;
 import br.com.fernando.lopes.finance.entities.Categoria;
 import br.com.fernando.lopes.finance.entities.Cliente;
 import br.com.fernando.lopes.finance.entities.Conta;
+import br.com.fernando.lopes.finance.entities.Lancamento;
 import br.com.fernando.lopes.finance.entities.Movimento;
 import br.com.fernando.lopes.finance.entities.tipos.ContaTipo;
+import br.com.fernando.lopes.finance.entities.tipos.LancamentoTipo;
+import br.com.fernando.lopes.finance.entities.tipos.StatusMovimento;
 import br.com.fernando.lopes.finance.reposirories.BancoRepository;
 import br.com.fernando.lopes.finance.reposirories.CategoriaRepository;
 import br.com.fernando.lopes.finance.reposirories.ClienteRepository;
 import br.com.fernando.lopes.finance.reposirories.ContaRepository;
+import br.com.fernando.lopes.finance.reposirories.LancamentoRepository;
 import br.com.fernando.lopes.finance.reposirories.MovimentoRepository;
 
 
@@ -42,6 +47,12 @@ public class ControlefinanceApplication implements CommandLineRunner {
 	
 	@Autowired 
 	private MovimentoRepository movimentoRepository;
+	
+	@Autowired
+	private LancamentoRepository lancamentoRepository;
+	
+	@Autowired
+	private BCryptPasswordEncoder bc;
 	
 	
 	//função main 
@@ -67,7 +78,7 @@ public class ControlefinanceApplication implements CommandLineRunner {
 		java.util.Date datadeaniversario = calendar.getTime();*/
 
 		
-		Cliente cli1 = new Cliente(null, 1, "Fernando Lopes", "nandolopes@gmail.com", "1234", LocalDate.of(1988, Month.SEPTEMBER, 26));
+		Cliente cli1 = new Cliente(null, 1, "Fernando Lopes", "nandolopes@gmail.com", bc.encode("1234"), LocalDate.of(1988, Month.SEPTEMBER, 26));
 		
 		Banco ba1 = new Banco(null, 001, "Caixa");
 		
@@ -87,6 +98,12 @@ public class ControlefinanceApplication implements CommandLineRunner {
 		Movimento mov1 = new Movimento(null, "Janeiro", co1);
 		
 		movimentoRepository.saveAll(Arrays.asList(mov1));
+		
+		Lancamento lan1 = new Lancamento(mov1, "LUZ", 100.00D, cat2, StatusMovimento.PAGO,LancamentoTipo.SAIDA);
+		Lancamento lan2 = new Lancamento(mov1, "salario", 900.00D, cat1, StatusMovimento.RECEBIDO,LancamentoTipo.ENTRADA);
+		Lancamento lan3 = new Lancamento(mov1, "agua", 90.00D, cat2, StatusMovimento.ATRASO, LancamentoTipo.SAIDA);
+		
+		lancamentoRepository.saveAll(Arrays.asList(lan1, lan2, lan3));
 		
 		
 		

@@ -34,7 +34,9 @@ public class CategoriaResource {
 			
 			Categoria obj = service.find(id);
 
-			//retorna um obj ResponceEntity se estiver ok ".ok()" mosta o corpo ".body()" do obj
+			/*
+			 * retorna um obj ResponceEntity se estiver ok ".ok()" mosta o corpo ".body()" do obj
+			 */
 			return ResponseEntity.ok().body(obj); 
 		}
 		
@@ -45,6 +47,7 @@ public class CategoriaResource {
 		public ResponseEntity<Void> insert(@RequestBody Categoria obj){ 
 			obj = service.insert(obj);
 			
+			System.out.println(obj);
 			//retornar a uri do novo obj
 			URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 												.path("/{id}")
@@ -59,6 +62,7 @@ public class CategoriaResource {
 		public ResponseEntity<Void> update(@RequestBody Categoria obj, @PathVariable Integer id){
 			obj.setId(id);
 			obj = service.update(obj);
+			System.out.println(obj);
 			return ResponseEntity.noContent().build();
 		}
 		

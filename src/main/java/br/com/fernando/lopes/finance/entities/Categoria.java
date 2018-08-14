@@ -22,8 +22,8 @@ public class Categoria implements Serializable{
 	private String nome;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "categorias")
-	private List<Lancamento> movimentos = new ArrayList<>();
+	@OneToMany(mappedBy = "categoria")
+	private List<Lancamento> lancamentos = new ArrayList<>();
 	
 	public Categoria() {	
 	}
@@ -49,12 +49,14 @@ public class Categoria implements Serializable{
 		this.nome = nome;
 	}	
 
-	public List<Lancamento> getMovimentos() {
-		return movimentos;
+
+
+	public List<Lancamento> getLancamentos() {
+		return lancamentos;
 	}
 
-	public void setMovimentos(List<Lancamento> movimentos) {
-		this.movimentos = movimentos;
+	public void setLancamentos(List<Lancamento> lancamentos) {
+		this.lancamentos = lancamentos;
 	}
 
 	@Override

@@ -1,21 +1,21 @@
 package br.com.fernando.lopes.finance.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 
 /*
  * classe chave primaria 
  */
 
 @Embeddable //para dizer que ela é um subtipo
-public class LancamentoPK extends Lancamento{
+public class LancamentoPK implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@ManyToOne
 	@JoinColumn(name="movimento_id")
-	@MapsId
 	private Movimento movimento;
 
 	public Movimento getMovimento() {
