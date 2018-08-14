@@ -18,7 +18,6 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.com.fernando.lopes.finance.entities.tipos.ContaTipo;
 
@@ -48,7 +47,7 @@ public class Conta implements Serializable{
 	//@MapsId
 	private Cliente cliente;
 	
-	@JsonManagedReference
+	@JsonBackReference
 	@OneToMany(mappedBy="conta", cascade = CascadeType.ALL)
 	private Set<Movimento> movimentos = new HashSet<>();
 	
