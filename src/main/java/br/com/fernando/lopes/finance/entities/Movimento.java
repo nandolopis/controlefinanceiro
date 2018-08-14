@@ -11,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -31,18 +30,14 @@ public class Movimento implements Serializable{
 	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="conta_id")
-	@MapsId
-	private Conta conta;
-	
+	private Conta conta;	
 	
 	@OneToMany(mappedBy="id.movimento", cascade = CascadeType.ALL)
 	private Set<Lancamento> lancamentos = new HashSet<>();
-	
-	
+		
 	public Movimento() {
 		
-	}
-	
+	}	
 
 	public Movimento(Integer id, String nome, Conta conta) {
 		super();
@@ -50,8 +45,6 @@ public class Movimento implements Serializable{
 		this.nome = nome;
 		this.conta = conta;
 	}
-
-
 
 	public Integer getId() {
 		return id;
@@ -101,10 +94,6 @@ public class Movimento implements Serializable{
 
 		return saldo;
 	}
-	
-	
-	
-
 
 	@Override
 	public int hashCode() {

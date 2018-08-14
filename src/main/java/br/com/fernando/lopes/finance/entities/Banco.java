@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,7 +28,7 @@ public class Banco implements Serializable{
 	private Date dataCriacao;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "banco", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "banco")
 	private Set<Conta> contas = new HashSet<>();
 	
 	public Banco() {
