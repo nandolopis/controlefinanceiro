@@ -1,5 +1,6 @@
 package br.com.fernando.lopes.finance.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,10 @@ public class CategoriaService {
 			throw new DataIntegrityViolationException("Não é possível Excluir uma categoria que possui lançamento");
 			
 		}
+	}
+	
+	public List<Categoria> findAll(){
+		return repo.findAll();
 	}
 
 }

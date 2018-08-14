@@ -36,7 +36,13 @@ public class ConfiguracaoSeguranca extends WebSecurityConfigurerAdapter {
 	};
 	
 	private static final String[] PUBLIC_MATCHERS_GET = {
-			
+			"/h2-console/**",
+			"/bancos/**",
+			"/caterorias/**",
+			"/movimentos/**",
+			"/contas/**",
+			"/lancamentos/**",
+			"/clientes/**"
 	};
 	
 	@Override
@@ -51,7 +57,7 @@ public class ConfiguracaoSeguranca extends WebSecurityConfigurerAdapter {
 		http.cors().and().csrf().disable();
 		
 		
-		http.authorizeRequests().antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll();
+		// http.authorizeRequests().antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll();
 		
 		//permitir todos os resources que estao no vetor PUBLIC_MATCHERS
 		http.authorizeRequests().antMatchers(PUBLIC_MATCHERS).permitAll()

@@ -1,6 +1,8 @@
 package br.com.fernando.lopes.finance.resources;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.com.fernando.lopes.finance.dto.CategoriaDTO;
 import br.com.fernando.lopes.finance.entities.Categoria;
 import br.com.fernando.lopes.finance.services.CategoriaService;
 
@@ -30,9 +33,7 @@ public class CategoriaResource {
 		public ResponseEntity<Categoria> find(@PathVariable Integer id) {
 			
 			Categoria obj = service.find(id);
-			
-			
-			
+
 			//retorna um obj ResponceEntity se estiver ok ".ok()" mosta o corpo ".body()" do obj
 			return ResponseEntity.ok().body(obj); 
 		}
@@ -65,6 +66,22 @@ public class CategoriaResource {
 		public ResponseEntity<Void> delete(@PathVariable Integer id){
 			service.delete(id);
 			return ResponseEntity.noContent().build();
+		}
+		
+		@RequestMapping( method=RequestMethod.GET)
+		public ResponseEntity<List<CategoriaDTO>> findAll() {
+			
+			List<Categoria> list = service.findAll();
+			
+			/*
+			 * convertendo a lista do tipo Categoria para o tipo CategoriaDTO
+			 * usando o metodo do java 8 Stream que mapea a lista retornando a lista 
+			 * através da função anônima gerando a collect
+			 */
+			List<CategoriaDTO> listDto = list.stream().map(obj -> new CategoriaDTO(obj))
+																.collect(Collectors.toList());
+			
+			return ResponseEntity.ok().body(listDto); 
 		}
 	
 	
