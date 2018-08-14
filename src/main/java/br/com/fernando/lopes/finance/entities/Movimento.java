@@ -31,7 +31,7 @@ public class Movimento implements Serializable{
 	@JoinColumn(name="conta_id")
 	private Conta conta;	
 	
-	@OneToMany(mappedBy="id.movimento")
+	@OneToMany(mappedBy="movimento")
 	private Set<Lancamento> lancamentos = new HashSet<>();
 		
 	public Movimento() {

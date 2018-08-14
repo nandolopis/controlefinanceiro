@@ -119,11 +119,13 @@ public class ControlefinanceApplication implements CommandLineRunner {
 		
 		movimentoRepository.saveAll(Arrays.asList(mov1));
 		
-		Lancamento lan1 = new Lancamento(mov1, "LUZ", 100.00D, cat2, StatusMovimento.PAGO,LancamentoTipo.SAIDA);
-		Lancamento lan2 = new Lancamento(mov1, "salario", 900.00D, cat1, StatusMovimento.RECEBIDO,LancamentoTipo.ENTRADA);
-		Lancamento lan3 = new Lancamento(mov1, "agua", 90.00D, cat2, StatusMovimento.ATRASO, LancamentoTipo.SAIDA);
+		Lancamento lan1 = new Lancamento(null, "LUZ", 100.00D, cat2, mov1 , StatusMovimento.PAGO,LancamentoTipo.SAIDA);
+		Lancamento lan2 = new Lancamento(null, "salario", 900.00D, cat1,mov1 ,StatusMovimento.RECEBIDO,LancamentoTipo.ENTRADA);
+		Lancamento lan3 = new Lancamento(null, "agua", 90.00D, cat2, mov1 ,StatusMovimento.ATRASO, LancamentoTipo.SAIDA);
+		
 		
 		lancamentoRepository.saveAll(Arrays.asList(lan1, lan2, lan3));
+		mov1.getLancamentos().addAll(Arrays.asList(lan1, lan2, lan3));
 		
 		
 		

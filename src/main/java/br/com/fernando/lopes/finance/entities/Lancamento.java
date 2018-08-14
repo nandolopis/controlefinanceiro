@@ -2,8 +2,10 @@ package br.com.fernando.lopes.finance.entities;
 
 import java.io.Serializable;
 
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
@@ -18,8 +20,9 @@ public class Lancamento implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@JsonIgnore
-	@EmbeddedId
-	private LancamentoPK id = new LancamentoPK();
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer id;
 	
 	private String nome;
 	private Double valor ;
@@ -31,30 +34,36 @@ public class Lancamento implements Serializable{
 	@JoinColumn(name="Categoria_id")
 	Categoria categoria;
 	
+	@ManyToOne
+	@JoinColumn(name="movimento_id")
+	private Movimento movimento;
+	
 	public Lancamento() {
 		
 	}
 
 
-	public Lancamento(Movimento movimento, String nome, Double valor, Categoria categoria , StatusMovimento status, LancamentoTipo tipo ) {
+	public Lancamento(Integer id,  String nome, Double valor, Categoria categoria ,Movimento movimento, StatusMovimento status, LancamentoTipo tipo ) {
 		super();
-		id.setMovimento(movimento);
+		this.id = id;
 		this.nome = nome;
 		this.valor = valor;
 		this.categoria = categoria;
+		this.movimento = movimento;
 		this.status = status;
 		this.tipo =  tipo;
 	}
 	
-	
-	
-	public LancamentoPK getId() {
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(LancamentoPK id) {
+
+	public void setId(Integer id) {
 		this.id = id;
 	}
+
 
 	public String getNome() {
 		return nome;
