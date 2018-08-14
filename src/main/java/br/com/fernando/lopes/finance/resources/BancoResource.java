@@ -18,7 +18,7 @@ public class BancoResource {
 	private BancoService service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id){
+	public ResponseEntity<Banco> find(@PathVariable Integer id){
 		
 		Banco obj = service.find(id);		
 		return ResponseEntity.ok().body(obj);

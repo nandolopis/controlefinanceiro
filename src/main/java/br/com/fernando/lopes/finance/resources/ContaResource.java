@@ -18,7 +18,7 @@ public class ContaResource {
 	private ContaService service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id){
+	public ResponseEntity<Conta> find(@PathVariable Integer id){
 		Conta obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
