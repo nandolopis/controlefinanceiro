@@ -39,6 +39,8 @@ public class Cliente implements Serializable {
 	//@JsonFormat(pattern = "dd/MM/YYYY")
 	private LocalDate dataAniversario;
 	
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+	private Set<CartaoCredito> cartoesCreditos = new HashSet<>();
 	
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
 	private Set<Conta> contas = new HashSet<>();
@@ -124,6 +126,14 @@ public class Cliente implements Serializable {
 
 	public void setContas(Set<Conta> contas) {
 		this.contas = contas;
+	}
+
+	public Set<CartaoCredito> getCartoesCreditos() {
+		return cartoesCreditos;
+	}
+
+	public void setCartoesCreditos(Set<CartaoCredito> cartoesCreditos) {
+		this.cartoesCreditos = cartoesCreditos;
 	}
 
 	@Override

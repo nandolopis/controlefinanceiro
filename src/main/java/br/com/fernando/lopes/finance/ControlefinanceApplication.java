@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import br.com.fernando.lopes.finance.entities.Banco;
+import br.com.fernando.lopes.finance.entities.CartaoCredito;
 import br.com.fernando.lopes.finance.entities.Categoria;
 import br.com.fernando.lopes.finance.entities.Cliente;
 import br.com.fernando.lopes.finance.entities.Conta;
@@ -20,6 +21,7 @@ import br.com.fernando.lopes.finance.entities.tipos.ContaTipo;
 import br.com.fernando.lopes.finance.entities.tipos.LancamentoTipo;
 import br.com.fernando.lopes.finance.entities.tipos.StatusMovimento;
 import br.com.fernando.lopes.finance.reposirories.BancoRepository;
+import br.com.fernando.lopes.finance.reposirories.CartaoCreditoRepository;
 import br.com.fernando.lopes.finance.reposirories.CategoriaRepository;
 import br.com.fernando.lopes.finance.reposirories.ClienteRepository;
 import br.com.fernando.lopes.finance.reposirories.ContaRepository;
@@ -51,6 +53,8 @@ public class ControlefinanceApplication implements CommandLineRunner {
 	@Autowired
 	private LancamentoRepository lancamentoRepository;
 	
+	@Autowired
+	private CartaoCreditoRepository cartaoCreditoRepository;
 	@Autowired
 	private BCryptPasswordEncoder bc;
 	
@@ -109,7 +113,6 @@ public class ControlefinanceApplication implements CommandLineRunner {
 		
 		
 		clienteRepository.saveAll(Arrays.asList(cli1));
-		
 
 		bancoRepository.saveAll(Arrays.asList(ba1));
 		
@@ -127,7 +130,11 @@ public class ControlefinanceApplication implements CommandLineRunner {
 		lancamentoRepository.saveAll(Arrays.asList(lan1, lan2, lan3));
 		mov1.getLancamentos().addAll(Arrays.asList(lan1, lan2, lan3));
 		
+		CartaoCredito cc1 = new CartaoCredito(null, "Nubank", 5 , 15,  cli1);
 		
+		cli1.getCartoesCreditos().addAll(Arrays.asList(cc1));
+		
+		cartaoCreditoRepository.saveAll(Arrays.asList(cc1));
 
 		
 	}
