@@ -58,7 +58,7 @@ public class ConfiguracaoSeguranca extends WebSecurityConfigurerAdapter {
 		//desabilita o cors csrf - protocolo conta ataque 
 		http.cors().and().csrf().disable();
 		
-		http.cors().disable();
+		//http.cors().disable();
 		
 		http.authorizeRequests().antMatchers(PUBLIC_MATCHERS).permitAll();
 		// http.authorizeRequests().antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll();
@@ -74,11 +74,21 @@ public class ConfiguracaoSeguranca extends WebSecurityConfigurerAdapter {
 	
 	//permitir acesso por multiplas fontes
 	@Bean
-	CorsConfigurationSource corsConfigurationSource() {
-		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
-		return source;
-	}
+    public CorsConfigurationSource corsConfigurationSource() {
+        final CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedMethods(Arrays.asList("HEAD",
+                "GET", "POST", "PUT", "DELETE", "PATCH"));
+        // setAllowCredentials(true) is important, otherwise:
+        // The value of the 'Access-Control-Allow-Origin' header in the response must not be the wildcard '*' when the request's credentials mode is 'include'.
+        configuration.setAllowCredentials(true);
+        // setAllowedHeaders is important! Without it, OPTIONS preflight request
+        // will fail with 403 Invalid CORS request
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
 	
 	/*
 	 * Criptografrar as senha
