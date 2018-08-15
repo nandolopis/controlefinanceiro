@@ -3,6 +3,7 @@ package br.com.fernando.lopes.finance.entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -29,21 +30,21 @@ public class Conta implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	private String name;
+	
 	private ContaTipo tipoconta;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date dataCriacao;
 	
-	@ManyToOne
-	@JoinColumn(name="banco_id")
-	@MapsId
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="banco_id", referencedColumnName="id")
 	private Banco banco;
 	
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name="cliente_id")
-	//@MapsId
+	@JoinColumn(name="cliente_id", referencedColumnName="id" )
 	private Cliente cliente;
 	
 	@JsonIgnore
@@ -63,6 +64,7 @@ public class Conta implements Serializable{
 		this.cliente = cliente;
 		dataCriacao = new Date();
 	}
+
 
 	public Integer getId() {
 		return id;
