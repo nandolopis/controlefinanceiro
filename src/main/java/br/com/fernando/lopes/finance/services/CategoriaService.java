@@ -69,11 +69,11 @@ public class CategoriaService {
 	}
 	
 	/*
-	 * obj aux que instancia um obj a partir de um obj DTO
+	 * Converte um objDto para obj comum 
 	 */
 	
 	public Categoria fromDTO(CategoriaDTO objDto) {
-		return new Categoria(o)
+		return new Categoria(objDto.getId(), objDto.getNome());
 	}
 
 }

@@ -34,6 +34,7 @@ public class Lancamento implements Serializable{
 	@JoinColumn(name="Categoria_id")
 	Categoria categoria;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="movimento_id")
 	private Movimento movimento;

@@ -58,6 +58,8 @@ public class ConfiguracaoSeguranca extends WebSecurityConfigurerAdapter {
 		//desabilita o cors csrf - protocolo conta ataque 
 		http.cors().and().csrf().disable();
 		
+		http.cors().disable();
+		
 		http.authorizeRequests().antMatchers(PUBLIC_MATCHERS).permitAll();
 		// http.authorizeRequests().antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll();
 		

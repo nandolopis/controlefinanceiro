@@ -14,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Cliente implements Serializable {
@@ -38,7 +37,7 @@ public class Cliente implements Serializable {
 	//@JsonFormat(pattern = "dd/MM/YYYY")
 	private LocalDate dataAniversario;
 	
-	@JsonManagedReference
+	
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
 	private Set<Conta> contas = new HashSet<>();
 	

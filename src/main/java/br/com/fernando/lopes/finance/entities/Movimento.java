@@ -12,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import br.com.fernando.lopes.finance.entities.tipos.LancamentoTipo;
 import br.com.fernando.lopes.finance.entities.tipos.StatusMovimento;
 
@@ -26,7 +24,7 @@ public class Movimento implements Serializable{
 	private Integer id;
 	private String nome;
 	
-	@JsonManagedReference
+	
 	@ManyToOne
 	@JoinColumn(name="conta_id")
 	private Conta conta;	
