@@ -8,7 +8,7 @@ import javax.validation.constraints.NotEmpty;
 
 import br.com.fernando.lopes.finance.entities.Cliente;
 
-public class ClienteDTO implements Serializable{
+public class ClienteNewDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
@@ -21,17 +21,20 @@ public class ClienteDTO implements Serializable{
 	@NotEmpty(message="Preenchimento Obrigatório")
 	private String email;
 	
+	@NotEmpty(message="Preenchimento Obrigatório")
+	private String senha;
 	private LocalDate dataAniversario;
 	
-	public ClienteDTO() {
+	public ClienteNewDTO() {
 		
 	}
 
-	public ClienteDTO(Cliente obj) {
+	public ClienteNewDTO(Cliente obj) {
 		id = obj.getId();
 		codigo = obj.getCodigo();
 		nome = obj.getName();
 		email = obj.getEmail();
+		senha = obj.getSenha();
 		dataAniversario = obj.getDataAniversario();
 	}
 
@@ -67,6 +70,13 @@ public class ClienteDTO implements Serializable{
 		this.email = email;
 	}
 
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
 
 	public LocalDate getDataAniversario() {
 		return dataAniversario;

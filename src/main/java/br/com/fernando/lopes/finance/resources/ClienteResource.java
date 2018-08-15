@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.fernando.lopes.finance.dto.ClienteDTO;
+import br.com.fernando.lopes.finance.dto.ClienteNewDTO;
 import br.com.fernando.lopes.finance.entities.Cliente;
 import br.com.fernando.lopes.finance.services.ClienteService;
 
@@ -37,7 +38,7 @@ public class ClienteResource {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteDTO objDto){ 
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto){ 
 	
 		Cliente obj = service.fromDTO(objDto);
 
@@ -54,7 +55,7 @@ public class ClienteResource {
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO objDto, @PathVariable Integer id){
+	public ResponseEntity<Void> update(@Valid @RequestBody ClienteNewDTO objDto, @PathVariable Integer id){
 		Cliente obj = service.fromDTO(objDto);
 		obj.setId(id);
 		obj = service.update(obj);

@@ -10,7 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
-import br.com.fernando.lopes.finance.dto.ClienteDTO;
+import br.com.fernando.lopes.finance.dto.ClienteNewDTO;
 import br.com.fernando.lopes.finance.entities.Cliente;
 import br.com.fernando.lopes.finance.reposirories.ClienteRepository;
 
@@ -60,7 +60,7 @@ public class ClienteService {
 	 * Converte um objDto para obj comum 
 	 */
 	
-	public Cliente fromDTO(ClienteDTO objDto) {
+	public Cliente fromDTO(ClienteNewDTO objDto) {
 		return new Cliente(objDto.getId(), objDto.getCodigo() , objDto.getNome(), objDto.getEmail(), objDto.getSenha(), objDto.getDataAniversario());
 	}
 
