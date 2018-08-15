@@ -98,7 +98,7 @@ public class ControlefinanceApplication implements CommandLineRunner {
 		java.util.Date datadeaniversario = calendar.getTime();*/
 
 		
-		Cliente cli1 = new Cliente(null, 1, "Fernando Lopes", "nandolopes@gmail.com", bc.encode("1234"), LocalDate.of(1988, Month.SEPTEMBER, 26));
+		Cliente cli1 = new Cliente(null, null, "Fernando Lopes", "nandolopes@gmail.com", bc.encode("1234"), LocalDate.of(1988, Month.SEPTEMBER, 26));
 		
 		Banco ba1 = new Banco(null, 001, "Caixa");
 		
