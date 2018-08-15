@@ -19,8 +19,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.fernando.lopes.finance.dto.ClienteDTO;
 import br.com.fernando.lopes.finance.dto.ClienteNewDTO;
+import br.com.fernando.lopes.finance.entities.Categoria;
 import br.com.fernando.lopes.finance.entities.Cliente;
 import br.com.fernando.lopes.finance.services.ClienteService;
+import br.com.fernando.lopes.finance.services.exceptions.ObjectNotFoundException;
 
 @RestController
 @RequestMapping(value="/clientes")
@@ -33,6 +35,10 @@ public class ClienteResource {
 	public ResponseEntity<Cliente> find(@PathVariable Integer id){
 		
 		Cliente obj = service.find(id);
+		if (obj == null) {
+			throw new ObjectNotFoundException("Objeto não encontrado! Id: " + id
+					+ ", Tipo: " + Categoria.class.getName());
+		}
 		return ResponseEntity.ok().body(obj);
 		
 	}

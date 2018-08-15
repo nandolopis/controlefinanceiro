@@ -21,7 +21,6 @@ public class Banco implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private Integer codigo;
 	private String name;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
@@ -35,9 +34,8 @@ public class Banco implements Serializable{
 		dataCriacao = new Date();
 	}
 
-	public Banco(Integer id, Integer codigo, String name) {
+	public Banco(Integer id, String name) {
 		this.id = id;
-		this.codigo =  codigo;
 		this.name = name;
 		dataCriacao = new Date();
 	}
@@ -48,14 +46,6 @@ public class Banco implements Serializable{
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public Integer getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(Integer codigo) {
-		this.codigo = codigo;
 	}
 
 	public String getName() {

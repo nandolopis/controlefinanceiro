@@ -100,7 +100,7 @@ public class ControlefinanceApplication implements CommandLineRunner {
 		
 		Cliente cli1 = new Cliente(null, null, "Fernando Lopes", "nandolopes@gmail.com", bc.encode("1234"), LocalDate.of(1988, Month.SEPTEMBER, 26));
 		
-		Banco ba1 = new Banco(null, 001, "Caixa");
+		Banco ba1 = new Banco(null, "Caixa");
 		
 		Conta co1 = new Conta(null, "Corrente", ContaTipo.CONTACORRENT, ba1, cli1);
 		
@@ -120,7 +120,7 @@ public class ControlefinanceApplication implements CommandLineRunner {
 		movimentoRepository.saveAll(Arrays.asList(mov1));
 		
 		Lancamento lan1 = new Lancamento(null, "LUZ", 100.00D, cat2, mov1 , StatusMovimento.PAGO,LancamentoTipo.SAIDA);
-		Lancamento lan2 = new Lancamento(null, "salario", 900.00D, cat1,mov1 ,StatusMovimento.RECEBIDO,LancamentoTipo.ENTRADA);
+		Lancamento lan2 = new Lancamento(null, "salario", 900.00D, cat1 ,mov1 ,StatusMovimento.RECEBIDO,LancamentoTipo.ENTRADA);
 		Lancamento lan3 = new Lancamento(null, "agua", 90.00D, cat2, mov1 ,StatusMovimento.ATRASO, LancamentoTipo.SAIDA);
 		
 		
