@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.Arrays;
 
+import org.hibernate.validator.constraints.SafeHtml.Attribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,6 +17,7 @@ import br.com.fernando.lopes.finance.entities.Categoria;
 import br.com.fernando.lopes.finance.entities.Cliente;
 import br.com.fernando.lopes.finance.entities.Conta;
 import br.com.fernando.lopes.finance.entities.Lancamento;
+import br.com.fernando.lopes.finance.entities.LancamentoCartao;
 import br.com.fernando.lopes.finance.entities.Movimento;
 import br.com.fernando.lopes.finance.entities.tipos.ContaTipo;
 import br.com.fernando.lopes.finance.entities.tipos.LancamentoTipo;
@@ -25,6 +27,7 @@ import br.com.fernando.lopes.finance.reposirories.CartaoCreditoRepository;
 import br.com.fernando.lopes.finance.reposirories.CategoriaRepository;
 import br.com.fernando.lopes.finance.reposirories.ClienteRepository;
 import br.com.fernando.lopes.finance.reposirories.ContaRepository;
+import br.com.fernando.lopes.finance.reposirories.LancamentoCartaoRepository;
 import br.com.fernando.lopes.finance.reposirories.LancamentoRepository;
 import br.com.fernando.lopes.finance.reposirories.MovimentoRepository;
 
@@ -55,6 +58,10 @@ public class ControlefinanceApplication implements CommandLineRunner {
 	
 	@Autowired
 	private CartaoCreditoRepository cartaoCreditoRepository;
+	
+	@Autowired
+	private LancamentoCartaoRepository lancamentoCartaoRepository;
+	
 	@Autowired
 	private BCryptPasswordEncoder bc;
 	
@@ -102,7 +109,7 @@ public class ControlefinanceApplication implements CommandLineRunner {
 		java.util.Date datadeaniversario = calendar.getTime();*/
 
 		
-		Cliente cli1 = new Cliente(null, null, "Fernando Lopes", "nandolopes@gmail.com", bc.encode("1234"), LocalDate.of(1988, Month.SEPTEMBER, 26));
+		Cliente cli1 = new Cliente(null, "Fernando Lopes", "nandolopes@gmail.com", bc.encode("1234"), LocalDate.of(1988, Month.SEPTEMBER, 26));
 		
 		Banco ba1 = new Banco(null, "Caixa");
 		
@@ -135,6 +142,13 @@ public class ControlefinanceApplication implements CommandLineRunner {
 		cli1.getCartoesCreditos().addAll(Arrays.asList(cc1));
 		
 		cartaoCreditoRepository.saveAll(Arrays.asList(cc1));
+		
+		LancamentoCartao lc1 = new LancamentoCartao(null, "Padaria", 15.0,cat11 , cc1, StatusMovimento.ABERTO, LancamentoTipo.SAIDA);
+		
+		cc1.getLancamentos().addAll(Arrays.asList(lc1));
+		
+		lancamentoCartaoRepository.saveAll(Arrays.asList(lc1));
+		
 
 		
 	}

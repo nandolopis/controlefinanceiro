@@ -23,8 +23,6 @@ public class Cliente implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer codigo;
 	private String name;
 	
 	//@JsonFormat(pattern = "dd/MM/YYYY HH:mm")
@@ -36,7 +34,6 @@ public class Cliente implements Serializable {
 	@JsonIgnore
 	private String senha;
 	
-	//@JsonFormat(pattern = "dd/MM/YYYY")
 	private LocalDate dataAniversario;
 	
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
@@ -49,10 +46,9 @@ public class Cliente implements Serializable {
 		dataCadastro = LocalDate.now() ;
 	}
 
-	public Cliente(Integer id, Integer codigo, String name, String email, String senha, LocalDate dataAniversario) {
+	public Cliente(Integer id,String name, String email, String senha, LocalDate dataAniversario) {
 		super();
 		this.id = id;
-		this.codigo = codigo;
 		this.name = name;
 		this.email = email;
 		this.senha = senha;
@@ -68,14 +64,6 @@ public class Cliente implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public Integer getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(Integer codigo) {
-		this.codigo = codigo;
 	}
 
 	public String getName() {

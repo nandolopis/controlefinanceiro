@@ -1,6 +1,8 @@
 package br.com.fernando.lopes.finance.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -29,6 +32,10 @@ public class CartaoCredito implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="cliente_id", referencedColumnName="id")
 	private Cliente cliente;
+	
+
+	@OneToMany(mappedBy="cartaoCredito")
+	private Set<LancamentoCartao> lancamentos = new HashSet<>();
 	
 	public CartaoCredito() {
 		
@@ -81,6 +88,14 @@ public class CartaoCredito implements Serializable {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+
+	public Set<LancamentoCartao> getLancamentos() {
+		return lancamentos;
+	}
+
+	public void setLancamentos(Set<LancamentoCartao> lancamentos) {
+		this.lancamentos = lancamentos;
 	}
 	
 	

@@ -29,7 +29,6 @@ public class ClienteDTO implements Serializable{
 
 	public ClienteDTO(Cliente obj) {
 		id = obj.getId();
-		codigo = obj.getCodigo();
 		nome = obj.getName();
 		email = obj.getEmail();
 		dataAniversario = obj.getDataAniversario();

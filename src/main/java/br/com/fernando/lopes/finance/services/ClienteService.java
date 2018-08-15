@@ -67,11 +67,11 @@ public class ClienteService {
 	 */
 	
 	public Cliente fromDTO(ClienteDTO objDto) {
-		return new Cliente(objDto.getId(), objDto.getCodigo() , objDto.getNome(), objDto.getEmail(),null, objDto.getDataAniversario());
+		return new Cliente(objDto.getId(), objDto.getNome(), objDto.getEmail(),null, objDto.getDataAniversario());
 	}
 	
 	public Cliente fromDTO(ClienteNewDTO objDto) {
-		return new Cliente(objDto.getId(), objDto.getCodigo(), objDto.getNome(), objDto.getEmail(), bc.encode(objDto.getSenha()), objDto.getDataAniversario());
+		return new Cliente(objDto.getId(),  objDto.getNome(), objDto.getEmail(), bc.encode(objDto.getSenha()), objDto.getDataAniversario());
  
 	}
 	

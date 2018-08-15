@@ -1,7 +1,7 @@
 package br.com.fernando.lopes.finance.entities;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,20 +24,20 @@ public class Banco implements Serializable{
 	private String name;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-	private Date dataCriacao;
+	private LocalDate dataCriacao;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "banco")
 	private Set<Conta> contas = new HashSet<>();
 	
 	public Banco() {
-		dataCriacao = new Date();
+		dataCriacao = LocalDate.now();
 	}
 
 	public Banco(Integer id, String name) {
 		this.id = id;
 		this.name = name;
-		dataCriacao = new Date();
+		dataCriacao = LocalDate.now();
 	}
 
 	public Integer getId() {
@@ -64,7 +64,7 @@ public class Banco implements Serializable{
 		this.contas = contas;
 	}
 
-	public Date getDataCriacao() {
+	public LocalDate getDataCriacao() {
 		return dataCriacao;
 	}
 

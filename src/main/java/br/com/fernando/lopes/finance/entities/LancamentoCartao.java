@@ -16,7 +16,7 @@ import br.com.fernando.lopes.finance.entities.tipos.StatusMovimento;
 
 
 @Entity
-public class Lancamento implements Serializable{
+public class LancamentoCartao implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@JsonIgnore
@@ -34,33 +34,18 @@ public class Lancamento implements Serializable{
 	@JoinColumn(name="Categoria_id")
 	Categoria categoria;
 	
-	@JsonIgnore
-	@ManyToOne
-	@JoinColumn(name="movimento_id")
-	private Movimento movimento;
 	
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="cartaoCredito_id")
 	private CartaoCredito cartaoCredito;
 	
-	public Lancamento() {
+	public LancamentoCartao() {
 		
 	}
 
-
-	public Lancamento(Integer id,  String nome, Double valor, Categoria categoria , Movimento movimento, StatusMovimento status, LancamentoTipo tipo ) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.valor = valor;
-		this.categoria = categoria;
-		this.movimento = movimento;
-		this.status = status;
-		this.tipo =  tipo;
-	}
 	
-	public Lancamento(Integer id,  String nome, Double valor, Categoria categoria ,CartaoCredito cartaoCredito, StatusMovimento status, LancamentoTipo tipo ) {
+	public LancamentoCartao(Integer id,  String nome, Double valor, Categoria categoria ,CartaoCredito cartaoCredito, StatusMovimento status, LancamentoTipo tipo ) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -148,7 +133,7 @@ public class Lancamento implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Lancamento other = (Lancamento) obj;
+		LancamentoCartao other = (LancamentoCartao) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
