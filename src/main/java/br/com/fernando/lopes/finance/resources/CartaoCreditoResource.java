@@ -22,7 +22,7 @@ import br.com.fernando.lopes.finance.entities.CartaoCredito;
 import br.com.fernando.lopes.finance.services.CartaoCreditoService;
 
 @RestController
-@RequestMapping(value="/CartaoCreditos")
+@RequestMapping(value="/cartoes")
 public class CartaoCreditoResource {
 	
 		

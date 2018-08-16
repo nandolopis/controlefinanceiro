@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,10 +35,10 @@ public class Cliente implements Serializable {
 	
 	private LocalDate dataAniversario;
 	
-	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "cliente"/*, cascade = CascadeType.ALL*/)
 	private Set<CartaoCredito> cartoesCreditos = new HashSet<>();
 	
-	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "cliente"/*, cascade = CascadeType.ALL*/)
 	private Set<Conta> contas = new HashSet<>();
 	
 	public Cliente() {

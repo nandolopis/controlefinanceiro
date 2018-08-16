@@ -17,6 +17,7 @@ public class CartaoCreditoDTO implements Serializable {
 	
 	private Integer cliente_id;
 	
+	
 	public CartaoCreditoDTO() {
 		
 	}
@@ -69,8 +70,6 @@ public class CartaoCreditoDTO implements Serializable {
 		this.cliente_id = cliente_id;
 	}
 
-	
-	
 	
 
 }

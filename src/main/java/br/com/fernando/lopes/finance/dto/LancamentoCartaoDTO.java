@@ -2,7 +2,7 @@ package br.com.fernando.lopes.finance.dto;
 
 import java.io.Serializable;
 
-import br.com.fernando.lopes.finance.entities.Lancamento;
+import br.com.fernando.lopes.finance.entities.LancamentoCartao;
 import br.com.fernando.lopes.finance.entities.tipos.LancamentoTipo;
 import br.com.fernando.lopes.finance.entities.tipos.StatusMovimento;
 
@@ -15,18 +15,21 @@ public class LancamentoCartaoDTO implements Serializable{
 	
 	private StatusMovimento status;
 	private LancamentoTipo tipo;
+	private Integer categoria_id;
+	private Integer cartao_id;
 	
 	public LancamentoCartaoDTO() {
 		
 	}
-	
-	public LancamentoCartaoDTO(Lancamento obj) {
+
+	public LancamentoCartaoDTO(LancamentoCartao obj) {
 		id = obj.getId();
 		nome = obj.getNome();
 		valor = obj.getValor();
 		status = obj.getStatus();
 		tipo = obj.getTipo();
 	}
+
 
 	public Integer getId() {
 		return id;
@@ -67,5 +70,22 @@ public class LancamentoCartaoDTO implements Serializable{
 	public void setTipo(LancamentoTipo tipo) {
 		this.tipo = tipo;
 	}
+
+	public Integer getCategoria_id() {
+		return categoria_id;
+	}
+
+	public void setCategoria_id(Integer categoria_id) {
+		this.categoria_id = categoria_id;
+	}
+
+	public Integer getCartao_id() {
+		return cartao_id;
+	}
+
+	public void setCartao_id(Integer cartao_id) {
+		this.cartao_id = cartao_id;
+	}
+	
 
 }

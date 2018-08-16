@@ -46,7 +46,7 @@ public class Conta implements Serializable{
 	private Cliente cliente;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy="conta", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="conta"/*, cascade = CascadeType.ALL*/)
 	private Set<Movimento> movimentos = new HashSet<>();
 	
 	public Conta() {

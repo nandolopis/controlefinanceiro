@@ -15,6 +15,9 @@ public class LancamentoDTO implements Serializable{
 	
 	private StatusMovimento status;
 	private LancamentoTipo tipo;
+	private Integer categoria_id;
+	
+	private Integer movimento_id;
 	
 	public LancamentoDTO() {
 		
@@ -59,6 +62,16 @@ public class LancamentoDTO implements Serializable{
 	public void setStatus(StatusMovimento status) {
 		this.status = status;
 	}
+	
+
+	
+	public Integer getCategoria_id() {
+		return categoria_id;
+	}
+
+	public void setCategoria_id(Integer categoria_id) {
+		this.categoria_id = categoria_id;
+	}
 
 	public LancamentoTipo getTipo() {
 		return tipo;
@@ -67,5 +80,15 @@ public class LancamentoDTO implements Serializable{
 	public void setTipo(LancamentoTipo tipo) {
 		this.tipo = tipo;
 	}
+
+	public Integer getMovimento_id() {
+		return movimento_id;
+	}
+
+	public void setMovimento_id(Integer movimento_id) {
+		this.movimento_id = movimento_id;
+	}
+	
+	
 
 }

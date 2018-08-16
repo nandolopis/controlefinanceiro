@@ -32,18 +32,13 @@ public class Lancamento implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="Categoria_id")
-	Categoria categoria;
+	private Categoria categoria;
 	
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="movimento_id")
 	private Movimento movimento;
-	
-	@JsonIgnore
-	@ManyToOne
-	@JoinColumn(name="cartaoCredito_id")
-	private CartaoCredito cartaoCredito;
-	
+
 	public Lancamento() {
 		
 	}
@@ -59,18 +54,7 @@ public class Lancamento implements Serializable{
 		this.status = status;
 		this.tipo =  tipo;
 	}
-	
-	public Lancamento(Integer id,  String nome, Double valor, Categoria categoria ,CartaoCredito cartaoCredito, StatusMovimento status, LancamentoTipo tipo ) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.valor = valor;
-		this.categoria = categoria;
-		this.cartaoCredito = cartaoCredito;
-		this.status = status;
-		this.tipo =  tipo;
-	}
-	
+
 
 	public Integer getId() {
 		return id;
@@ -94,6 +78,14 @@ public class Lancamento implements Serializable{
 		return valor;
 	}
 
+	public Movimento getMovimento() {
+		return movimento;
+	}
+	
+	
+	public void setMovimento(Movimento movimento) {
+		this.movimento = movimento;
+	}
 
 	public void setValor(Double valor) {
 		this.valor = valor;

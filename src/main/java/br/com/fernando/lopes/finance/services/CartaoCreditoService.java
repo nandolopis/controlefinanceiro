@@ -12,9 +12,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.fernando.lopes.finance.dto.CartaoCreditoDTO;
 import br.com.fernando.lopes.finance.entities.CartaoCredito;
-import br.com.fernando.lopes.finance.entities.Cliente;
 import br.com.fernando.lopes.finance.reposirories.CartaoCreditoRepository;
-import br.com.fernando.lopes.finance.reposirories.ClienteRepository;
 import br.com.fernando.lopes.finance.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -22,8 +20,8 @@ public class CartaoCreditoService {
 	
 	@Autowired
 	private CartaoCreditoRepository repo;
-	
-	private ClienteRepository clienteRepository;
+	@Autowired
+	private ClienteService clienteService;
 	
 	public CartaoCredito find(Integer id)  {
 		
@@ -44,8 +42,9 @@ public class CartaoCreditoService {
 	}
 	
 	public CartaoCredito update(CartaoCredito obj) {
-		find(obj.getId());
-		return repo.save(obj);
+		CartaoCredito newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return repo.save(newObj);
 	}
 	
 	public void delete(Integer id) {
@@ -75,10 +74,16 @@ public class CartaoCreditoService {
 	
 	public CartaoCredito fromDTO(CartaoCreditoDTO objDto) {
 		
-		Cliente cliente = (clienteRepository.findById(objDto.getCliente_id())).get(); 
-		
-		return new CartaoCredito(objDto.getId(), objDto.getNome(), objDto.getDiaVencimanto(), objDto.getDiaFechamento(), cliente);
+		return new CartaoCredito(objDto.getId(), objDto.getNome(), 
+												 objDto.getDiaVencimanto(),
+												 objDto.getDiaFechamento(), 
+												 (clienteService.find(objDto.getCliente_id())));
 	}
+	
+	public void updateData(CartaoCredito newObj, CartaoCredito obj) {
+		
+	}
+
 	
 
 }
